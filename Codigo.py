@@ -1,30 +1,28 @@
 
-class Artista:
-    def __init__(self, nombre, nacionalidad, tecnica_pintura):
+class Artista: #Se crea la clase Artista
+    def __init__(self, nombre, nacionalidad, tecnica_pintura): #el __init__ sirve para iniciar los atributos de la clase
         self.nombre = nombre
         self.nacionalidad = nacionalidad
         self.tecnica_pintura = tecnica_pintura
-        self.pinturas = []
+        self.pinturas = [] # Lista para almacenar muchas pinturas del artista
 
-    def mostrar_info(self):
-        print(f"Artista: {self.nombre}, Nacionalidad: {self.nacionalidad}, Técnica: {self.tecnica_pintura}")
+    def mostrar_info(self): #método para mostrar la información del artista
+        print(f"Artista: {self.nombre}, Nacionalidad: {self.nacionalidad}, Técnica: {self.tecnica_pintura}") #se llama self para referirse a los atributos de la clase
 
-    def enviar_propuesta_exhibicion(self):
+    def enviar_propuesta_exhibicion(self): #método para enviar una propuesta de exhibición
         print(f"{self.nombre} envió una propuesta de exhibición.")
 
-    def enviar_pinturas(self, pintura):
+    def enviar_pinturas(self, pintura): #método para enviar pinturas
         self.pinturas.append(pintura)
 
-
-class Pintura:
-    def __init__(self, titulo, fecha_creacion, artista):
+class Pintura: #Se crea la clase Pintura
+    def __init__(self, titulo, fecha_creacion, artista): #se inician los atributos de la clase
         self.titulo = titulo
         self.fecha_creacion = fecha_creacion
-        self.autor = artista
+        self.autor = artista # Relación con la clase Artista
 
     def exhibir(self):
         print(f"Exhibiendo pintura: {self.titulo} de {self.autor.nombre}")
-
 
 class MuseoDeArte:
     def __init__(self, id_museo, nombre, direccion, telefono):
@@ -32,15 +30,14 @@ class MuseoDeArte:
         self.nombre = nombre
         self.direccion = direccion
         self.telefono = telefono
-        self.pinturas = []
-        self.asesores = []
+        self.pinturas = [] # Lista para almacenar muchas pinturas en el museo
+        self.asesores = [] # Lista para almacenar muchos asesores en el museo
 
     def lanzar_exhibicion(self, exhibicion):
         print(f"Museo {self.nombre} lanza la exhibición: {exhibicion.titulo}")
 
     def mostrar_informacion(self):
         print(f"Museo: {self.nombre}, Dirección: {self.direccion}, Tel: {self.telefono}")
-
 
 class Asesor:
     def __init__(self, id_asesor, nombre, apellidos):
@@ -51,9 +48,8 @@ class Asesor:
     def notificar_estado_propuesta(self):
         print(f"Asesor {self.nombre} notificó estado de propuesta.")
 
-    def enviar_sugerencias(self):
+    def enviar_sugerencias(self): # método para enviar sugerencias
         print(f"Asesor {self.nombre} envió sugerencias.")
-
 
 class Exhibicion:
     def __init__(self, id_exhibicion, titulo, fecha_comienzo, fecha_finalizacion):
@@ -61,11 +57,10 @@ class Exhibicion:
         self.titulo = titulo
         self.fecha_comienzo = fecha_comienzo
         self.fecha_finalizacion = fecha_finalizacion
-        self.pinturas = []
+        self.pinturas = [] # Lista para almacenar muchas pinturas en la exhibición
 
     def mostrar_info_exhibicion(self):
         print(f"Exhibición: {self.titulo}, Empieza: {self.fecha_comienzo}, Termina: {self.fecha_finalizacion}")
-
 
 class Visitante:
     def __init__(self, id_visitante, nombre, apellidos):
@@ -82,8 +77,7 @@ class Visitante:
     def asistir_exhibicion(self, exhibicion):
         print(f"{self.nombre} asistió a la exhibición: {exhibicion.titulo}")
 
-# Creación de objetos según el diagrama de objetos proporcionado
-
+#Ejemplo
 # Artista
 vincent = Artista(
     nombre="Vincent van Gogh",
@@ -91,7 +85,6 @@ vincent = Artista(
     tecnica_pintura="Óleo sobre lienzo"
 )
 vincent.mostrar_info()  # información del artista
-
 # Pintura
 noche_estrellada = Pintura(
     titulo="La Noche Estrellada",
@@ -99,7 +92,6 @@ noche_estrellada = Pintura(
     artista=vincent
 )
 noche_estrellada.exhibir()  # pintura en exhibición
-
 # Asesor
 geraldo = Asesor(
     id_asesor=203,
@@ -107,7 +99,6 @@ geraldo = Asesor(
     apellidos="Perez Ramirez"
 )
 geraldo.enviar_sugerencias()  # El asesor envía sugerencias
-
 # Visitante
 samantha = Visitante(
     id_visitante=420,
@@ -115,7 +106,6 @@ samantha = Visitante(
     apellidos="García López"
 )
 samantha.comprar_entradas()  # El visitante compra entradas
-
 # Exhibición
 expo = Exhibicion(
     id_exhibicion=1,
@@ -124,7 +114,6 @@ expo = Exhibicion(
     fecha_finalizacion="26/06/2025"
 )
 expo.mostrar_info_exhibicion()  # Información de la exhibición
-
 # Museo de arte
 museo_van_gogh = MuseoDeArte(
     id_museo=100,
@@ -133,12 +122,10 @@ museo_van_gogh = MuseoDeArte(
     telefono=31205705200
 )
 museo_van_gogh.mostrar_informacion()  # Información del museo
-
-# Establecimiento de relaciones
-museo_van_gogh.pinturas.append(noche_estrellada)
+#relaciones
+museo_van_gogh.pinturas.append(noche_estrellada) #se cita primero a el museo, la lista pinturas y se añade la pintura
 museo_van_gogh.asesores.append(geraldo)
 expo.pinturas.append(noche_estrellada)
 samantha.asistir_exhibicion(expo)
-
-# Comentario del visitante
+# Comentario visitante
 samantha.dar_comentarios()

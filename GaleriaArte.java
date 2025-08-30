@@ -22,7 +22,7 @@ public class GaleriaArte {  //se crea la clase principal GaleriaArteApp
         private String tecnicaPintura;
 
         public Artista(int id, String nombre, String apellidos, String nacionalidad, String tecnicaPintura) {
-            super(id, nombre, apellidos);
+            super(id, nombre, apellidos); 
             this.nacionalidad = nacionalidad;
             this.tecnicaPintura = tecnicaPintura;
         }
@@ -35,8 +35,8 @@ public class GaleriaArte {  //se crea la clase principal GaleriaArteApp
             System.out.println(nombre + " envió una propuesta de exhibición.");
         }
 
-        public void enviarPinturas(Pintura pintura) {
-            System.out.println(nombre + " recibió la pintura: " + pintura.getTitulo());
+        public void enviarPinturas() {
+            System.out.println(nombre + " envió la pintura ");
         }
     }
 
@@ -54,10 +54,6 @@ public class GaleriaArte {  //se crea la clase principal GaleriaArteApp
 
         public void exhibir() {
             System.out.println("Exhibiendo pintura: " + titulo + " de " + autor.nombre);
-        }
-
-        public String getTitulo() {
-            return titulo;
         }
     }
 
@@ -149,24 +145,22 @@ public class GaleriaArte {  //se crea la clase principal GaleriaArteApp
         Artista vincent = new Artista(1, "Vincent", "van Gogh", "Neerlandés", "Óleo sobre lienzo");
         vincent.mostrarInfo();
         vincent.enviarPropuestaExhibicion();
+        vincent.enviarPinturas();
         Pintura nocheEstrellada = new Pintura("La Noche Estrellada", "1889", vincent); //new indica que se está creando un nuevo objeto
         nocheEstrellada.exhibir();
-        Asesor geraldo = new Asesor(203, "Geraldo", "Perez Ramirez");
-        geraldo.enviarSugerencias();
-
-        Visitante samantha = new Visitante(420, "Samantha", "García López");
-        samantha.comprarEntradas();
-
         Exhibicion expo = new Exhibicion(1, "Van Gogh y los Colores de la Noche", "20/08/2025", "26/08/2025");
         expo.mostrarInfo();
+        Visitante samantha = new Visitante(420, "Samantha", "García López");
+        samantha.comprarEntradas();
+        samantha.asistirExhibicion(expo);
+        samantha.darComentarios();
+        Asesor geraldo = new Asesor(203, "Geraldo", "Perez Ramirez");
+        geraldo.enviarSugerencias();
         MuseoDeArte museoVanGogh = new MuseoDeArte(100, "Museo Van Gogh", "Museumplein 6, 1071 DJ Amsterdam", 3120505200L);
         museoVanGogh.mostrarInfo();
-
         museoVanGogh.pinturas.add(nocheEstrellada);
         museoVanGogh.asesores.add(geraldo);
         expo.pinturas.add(nocheEstrellada);
-        samantha.asistirExhibicion(expo);
-        samantha.darComentarios();
         }
     }
 

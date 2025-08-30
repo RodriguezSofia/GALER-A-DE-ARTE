@@ -1,7 +1,15 @@
-
-class Artista: #Se crea la clase Artista
-    def __init__(self, nombre, nacionalidad, tecnica_pintura): #el __init__ sirve para iniciar los atributos de la clase
+class Persona: #Se crea la clase Persona
+    def __init__(self, id, nombre, apellidos): 
+        self.id = id
         self.nombre = nombre
+        self.apellidos = apellidos
+    
+    def mostrar_info(self):
+        print(f"Persona: {self.nombre} {self.apellidos}, ID: {self.id}") 
+
+class Artista(Persona): #Se crea la clase Artista
+    def __init__(self, id_artista, nombre, apellidos, nacionalidad, tecnica_pintura): #el __init__ sirve para iniciar los atributos de la clase
+        super().__init__(id_artista, nombre, apellidos) #se llama a la clase padre con super() que sirve para heredar atributos y métodos de la clase padre
         self.nacionalidad = nacionalidad
         self.tecnica_pintura = tecnica_pintura
         self.pinturas = [] # Lista para almacenar muchas pinturas del artista
@@ -36,14 +44,12 @@ class MuseoDeArte:
     def lanzar_exhibicion(self, exhibicion):
         print(f"Museo {self.nombre} lanza la exhibición: {exhibicion.titulo}")
 
-    def mostrar_informacion(self):
+    def mostrar_info(self):
         print(f"Museo: {self.nombre}, Dirección: {self.direccion}, Tel: {self.telefono}")
 
-class Asesor:
+class Asesor(Persona):
     def __init__(self, id_asesor, nombre, apellidos):
-        self.id_asesor = id_asesor
-        self.nombre = nombre
-        self.apellidos = apellidos
+        super().__init__(id_asesor, nombre, apellidos) #hereda de la clase padre 
 
     def notificar_estado_propuesta(self):
         print(f"Asesor {self.nombre} notificó estado de propuesta.")
@@ -59,14 +65,12 @@ class Exhibicion:
         self.fecha_finalizacion = fecha_finalizacion
         self.pinturas = [] # Lista para almacenar muchas pinturas en la exhibición
 
-    def mostrar_info_exhibicion(self):
+    def mostrar_info(self):
         print(f"Exhibición: {self.titulo}, Empieza: {self.fecha_comienzo}, Termina: {self.fecha_finalizacion}")
 
-class Visitante:
+class Visitante(Persona):
     def __init__(self, id_visitante, nombre, apellidos):
-        self.id_visitante = id_visitante
-        self.nombre = nombre
-        self.apellidos = apellidos
+        super().__init__(id_visitante, nombre, apellidos)
 
     def dar_comentarios(self):
         print(f"Visitante {self.nombre} dejó un comentario.")
@@ -77,14 +81,18 @@ class Visitante:
     def asistir_exhibicion(self, exhibicion):
         print(f"{self.nombre} asistió a la exhibición: {exhibicion.titulo}")
 
+def mostrar_informacion_objeto(objeto):
+    objeto.mostrar_info()
+
 #Ejemplo
 # Artista
-vincent = Artista(
-    nombre="Vincent van Gogh",
+vincent = Artista( 
+    id_artista=1,
+    nombre="Vincent",
+    apellidos="van Gogh",
     nacionalidad="Neerlandés",
     tecnica_pintura="Óleo sobre lienzo"
 )
-vincent.mostrar_info()  # información del artista
 # Pintura
 noche_estrellada = Pintura(
     titulo="La Noche Estrellada",
@@ -110,10 +118,9 @@ samantha.comprar_entradas()  # El visitante compra entradas
 expo = Exhibicion(
     id_exhibicion=1,
     titulo="Van Gogh y los Colores de la Noche",
-    fecha_comienzo="20/06/2025",
-    fecha_finalizacion="26/06/2025"
+    fecha_comienzo="20/08/2025",
+    fecha_finalizacion="26/08/2025"
 )
-expo.mostrar_info_exhibicion()  # Información de la exhibición
 # Museo de arte
 museo_van_gogh = MuseoDeArte(
     id_museo=100,
@@ -121,7 +128,6 @@ museo_van_gogh = MuseoDeArte(
     direccion="Museumplein 6, 1071 DJ Amsterdam",
     telefono=31205705200
 )
-museo_van_gogh.mostrar_informacion()  # Información del museo
 #relaciones
 museo_van_gogh.pinturas.append(noche_estrellada) #se cita primero a el museo, la lista pinturas y se añade la pintura
 museo_van_gogh.asesores.append(geraldo)
@@ -129,3 +135,7 @@ expo.pinturas.append(noche_estrellada)
 samantha.asistir_exhibicion(expo)
 # Comentario visitante
 samantha.dar_comentarios()
+objetos = [vincent, expo, museo_van_gogh]
+for objeto in objetos:
+    mostrar_informacion_objeto(objeto)
+
